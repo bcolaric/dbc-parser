@@ -1,0 +1,11 @@
+# Rider
+.idea/
+
+# Build output
+bin/
+obj/
+
+# OS
+*.swp
+.DS_Store
+
