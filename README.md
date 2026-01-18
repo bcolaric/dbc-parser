@@ -14,14 +14,17 @@ cd DbcParser
 git checkout dev
 dotnet restore
 dotnet build
+```
 
 ## Run tests
 ```bash
 dotnet test
+```
 
 ## Run application
 ```bash
 cd DbcParser.App
 dotnet run
+```
 
 
