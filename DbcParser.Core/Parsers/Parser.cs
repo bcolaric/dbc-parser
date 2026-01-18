@@ -43,13 +43,6 @@ public class Parser
                 continue;
             }
             
-            // Network nodes
-            if (line.StartsWith("BU_:"))
-            {
-                ParseNodes(line, network);
-                continue;
-            }  
-            
             // Messages
             var msgMatch = MessageRegex.Match(line);
 
@@ -85,12 +78,6 @@ public class Parser
         }
         
         return network;
-    }
-
-    private static void ParseNodes(string line, Network network)
-    {
-        var parts = line.Substring(4).Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        network.Nodes.AddRange(parts);
     }
 
     private static Message ParseMessage(Match match)
