@@ -7,7 +7,7 @@ namespace DbcParser.Parsers;
 public class Parser
 {
     private static readonly Regex MessageRegex = new Regex(
-        @"^BO_\s+(\d+)\s+(\S+):\s+(\d+)",
+        @"^BO_\s+(\d+)\s+(\S+):\s+(\d+)\s+(\S+)",
         RegexOptions.Compiled
     );
 
@@ -87,6 +87,7 @@ public class Parser
             Id = int.Parse(match.Groups[1].Value),
             Name = match.Groups[2].Value.TrimEnd(':'),
             Length = int.Parse(match.Groups[3].Value),
+            Transmitter = match.Groups[4].Value
         };
 
         return msg;

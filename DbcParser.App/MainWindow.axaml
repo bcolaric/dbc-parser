@@ -1,22 +1,89 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:DbcParser.Models;assembly=DbcParser.Core"
+        xmlns:app="clr-namespace:DbcParser.App"
         x:Class="DbcParser.App.MainWindow"
         Title="DBC Parser"
-        Width="800"
-        Height="600">
+        Width="1200"
+        Height="800">
 
     <DockPanel Margin="10">
 
-        <Button DockPanel.Dock="Top"
-                Content="Load DBC file"
-                Click="OnLoadDbcClicked"
-                Height="30"/>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="10">
+            <Button Content="Load DBC file"
+                    Click="OnLoadDbcClicked"
+                    Height="30"
+                    Width="120"
+                    HorizontalContentAlignment="Center"/>
+            <TextBlock Name="FileNameText" 
+                       VerticalAlignment="Center"
+                       Text="No file loaded"/>
+        </StackPanel>
 
-        <ScrollViewer Margin="0,10,0,0">
-            <TextBox Name="DbcContentTextBox"
-                     AcceptsReturn="True"
-                     IsReadOnly="True"/>
-        </ScrollViewer>
+        <Grid Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" 
+                       Text="Messages:" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5"/>
+
+            <DataGrid Grid.Row="1"
+                      Name="MessagesDataGrid"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionChanged="OnMessageSelected"
+                      GridLinesVisibility="All"
+                      BorderThickness="1"
+                      BorderBrush="Gray"
+                      x:DataType="models:Message">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="80"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Length" Binding="{Binding Length}" Width="90"/>
+                    <DataGridTextColumn Header="Transmitter" Binding="{Binding Transmitter}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GridSplitter Grid.Row="2" 
+                         Height="10" 
+                         HorizontalAlignment="Stretch"
+                         Background="Transparent"/>
+
+            <TextBlock Grid.Row="3" 
+                       Text="Signals:" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5"/>
+            
+            <DataGrid Grid.Row="4"
+                      Name="SignalsDataGrid"
+                      IsReadOnly="True"
+                      GridLinesVisibility="All"
+                      BorderThickness="1"
+                      BorderBrush="Gray"
+                      x:DataType="app:SignalViewModel">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+                    <DataGridTextColumn Header="StartBit" Binding="{Binding StartBit}" Width="100"/>
+                    <DataGridTextColumn Header="Length" Binding="{Binding Length}" Width="90"/>
+                    <DataGridTextColumn Header="LittleEndian" Binding="{Binding LittleEndian}" Width="110"/>
+                    <DataGridTextColumn Header="IsSigned" Binding="{Binding IsSigned}" Width="100"/>
+                    <DataGridTextColumn Header="Scale" Binding="{Binding Scale}" Width="80"/>
+                    <DataGridTextColumn Header="Offset" Binding="{Binding Offset}" Width="80"/>
+                    <DataGridTextColumn Header="Minimum" Binding="{Binding Min}" Width="100"/>
+                    <DataGridTextColumn Header="Maximum" Binding="{Binding Max}" Width="100"/>
+                    <DataGridTextColumn Header="MetricUnit" Binding="{Binding MetricUnit}" Width="110"/>
+                    <DataGridTextColumn Header="ValueTable" Binding="{Binding ValueTable}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
 
     </DockPanel>
 </Window>
