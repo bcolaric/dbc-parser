@@ -4,16 +4,16 @@ namespace DbcParser.Models;
 
 public class Signal
 {
-    public string name { get; init; } = string.Empty;
-    public int start_bit { get; init; } 
-    public int length { get; init; }
-    public bool little_endian { get; init; } // little or big
-    public bool signed { get; init; } // signed or unsigned
-    public double scale { get; init; }
-    public double offset { get; init; }
-    public double min { get; init; }
-    public double max { get; init; }
-    public string metric_unit { get; init; } = string.Empty;
+    public string Name { get; set; } = "";
+    public int StartBit { get; set; } 
+    public int Length { get; set; }
+    public bool LittleEndian { get; set; } // little or big
+    public bool Signed { get; set; } // signed or unsigned
+    public double Scale { get; set; }
+    public double Offset { get; set; }
+    public double Min { get; set; }
+    public double Max { get; set; }
+    public string MetricUnit { get; set; } = "";
 
-    public Dictionary<string, string> attributes { get; } = new(); // (key, value) -> (name, value)
+    public Dictionary<int, string>? Attributes { get; set; } = new(); // (key, value) -> (name, value)
 }
